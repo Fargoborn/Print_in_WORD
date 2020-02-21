@@ -4,13 +4,12 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import print_in_word.print.Print;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +17,6 @@ import java.io.IOException;
 public class MainController {
 
     String work_file = "";
-    private Task workTask;
     Stage Window = new Stage();
 
     @FXML
@@ -27,17 +25,15 @@ public class MainController {
         pint_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String fxmlFile = "/fxml/hello.fxml";
-                FXMLLoader loader = new FXMLLoader();
-                Parent root = null;
+
+
+                System.out.println(work_file);
+                Print print = new Print();
                 try {
-                    root = loader.load(getClass().getResourceAsStream(fxmlFile));
-                } catch (IOException e) {
+                    print.prints(work_file, "D:\\Print_in_WORD\\1.xls");
+                } catch (IOException | InvalidFormatException e) {
                     e.printStackTrace();
                 }
-                Window.setTitle("Печать в шаблоны WORD");
-                Window.setScene(new Scene(root));
-                Window.show();
             }
         });
     }
