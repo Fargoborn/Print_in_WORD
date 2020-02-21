@@ -23,11 +23,17 @@ public class Print {
         Persons persons = new Persons();
         ArrayList<String> names = persons.getPersons(file_excel);
         //InputStream in = new FileInputStream("D:\\Print_in_WORD\\Общество с ограниченной.docx");
-        XWPFDocument document = new XWPFDocument(OPCPackage.open(filename));
-        String searchValue = "#FIO";
 
+        String searchValue = "#FIO";
         int i = 0;
         for (String name : names) {
+            XWPFDocument document=new XWPFDocument(new FileInputStream(filename) {
+                @Override
+                public int read() throws IOException {
+                    return 0;
+                }
+            });
+            System.out.println(name);
             for (XWPFParagraph p : document.getParagraphs()) {
                 List<XWPFRun> runs = p.getRuns();
                 if (runs != null) {
@@ -39,10 +45,12 @@ public class Print {
                         }
                     }
                 }
+                FileOutputStream outputStream = new FileOutputStream("E:\\Git_Rep\\Print_in_WORD\\" + i + "_" + name + ".doc");
+                document.write(outputStream);
+                outputStream.close();
             }
         i++;
-            document.write(new FileOutputStream("D:\\Print_in_WORD\\" + i + "output.docx"));
-            document.close();
+
         }
     }
 }

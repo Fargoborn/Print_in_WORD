@@ -30,7 +30,7 @@ public class MainController {
                 System.out.println(work_file);
                 Print print = new Print();
                 try {
-                    print.prints(work_file, "D:\\Print_in_WORD\\1.xls");
+                    print.prints(work_file, "E:\\Git_Rep\\Print_in_WORD\\1.xls");
                 } catch (IOException | InvalidFormatException e) {
                     e.printStackTrace();
                 }
@@ -44,7 +44,7 @@ public class MainController {
     private TextField textField;
     public void click_file_choose() {
         final FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File("D:\\Print_in_WORD"));
+        fileChooser.setInitialDirectory(new File("E:\\Git_Rep\\Print_in_WORD"));
         file_choose.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
