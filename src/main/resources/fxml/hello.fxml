@@ -6,14 +6,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="212.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="print_in_word.controller.MainController">
+<AnchorPane prefHeight="275.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="print_in_word.controller.MainController">
     <children>
-        <Button fx:id="pint_button" layoutX="45.0" layoutY="119.0" mnemonicParsing="false" onAction="#click_print" prefHeight="31.0" prefWidth="511.0" text="Распечатать в шаблоны Word">
+        <Button fx:id="pint_button" layoutX="45.0" layoutY="172.0" mnemonicParsing="false" onAction="#click_print" prefHeight="31.0" prefWidth="511.0" text="Распечатать в шаблоны Word">
          <font>
             <Font size="14.0" />
          </font></Button>
       <TextField fx:id="textField" layoutX="45.0" layoutY="65.0" prefHeight="31.0" prefWidth="511.0" />
-      <Button fx:id="file_choose" onAction="#click_file_choose" layoutX="515.0" layoutY="65.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="41.0" text=". . ." />
+      <Button fx:id="file_choose" layoutX="515.0" layoutY="65.0" mnemonicParsing="false" onAction="#click_file_choose" prefHeight="31.0" prefWidth="41.0" text=". . ." />
       <Label layoutX="45.0" layoutY="42.0" prefHeight="23.0" prefWidth="511.0" text="Путь к шаблону" />
+      <Label layoutX="45.0" layoutY="99.0" prefHeight="23.0" prefWidth="511.0" text="Путь к списку" />
+      <TextField fx:id="pr_Field_list" layoutX="525.0" layoutY="217.0" prefHeight="31.0" prefWidth="31.0" />
+      <TextField fx:id="textField_list" layoutX="45.0" layoutY="122.0" prefHeight="31.0" prefWidth="511.0" />
+      <Button fx:id="file_choose_list" layoutX="515.0" layoutY="122.0" mnemonicParsing="false" onAction="#click_file_choose_list" prefHeight="31.0" prefWidth="41.0" text=". . ." />
     </children>
 </AnchorPane>

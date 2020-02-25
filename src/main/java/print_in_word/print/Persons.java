@@ -33,7 +33,7 @@ public class Persons {
                     Row row = it.next();
                     Cell pers_cell = row.getCell(1);
                     list_persons.add(pers_cell.getStringCellValue());
-                    System.out.println(pers_cell.getStringCellValue());
+                    //System.out.println(pers_cell.getStringCellValue());
             }
             }
         }
