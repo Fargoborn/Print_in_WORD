@@ -1,31 +1,25 @@
 package print_in_word.print;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xwpf.usermodel.*;
-import print_in_word.controller.MainController;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Print {
 
-    public Print() {
-    }
+    public Print() {}
 
-    public void prints (String filename, String file_excel) throws IOException, InvalidFormatException {
-
+    public void prints (String filename, String file_excel) throws IOException {
         Persons persons = new Persons();
         ArrayList<String> personal = persons.getPersons(file_excel);
         String fio = "";
         String status = "";
         //InputStream in = new FileInputStream("D:\\Print_in_WORD\\Общество с ограниченной.docx");
-
         String searchValue = "#FIO";
         int i = 0;
         for (String pers : personal) {
@@ -39,7 +33,7 @@ public class Print {
                     return 0;
                 }
             });
-            System.out.println(name);
+            //System.out.println(name);
             for (XWPFTable tables : document.getTables()) {
                 for (XWPFTableRow rows : tables.getRows()) {
                     for (XWPFTableCell cells : rows.getTableCells()) {
@@ -70,7 +64,7 @@ public class Print {
                     }
                 }
 
-            System.out.println("@@@@@@");
+            //System.out.println("@@@@@@");
             for (XWPFParagraph p : document.getParagraphs()) {
                 List<XWPFRun> runs = p.getRuns();
                 if (runs != null) {
@@ -90,7 +84,8 @@ public class Print {
                         }
                     }
                 }
-                FileOutputStream outputStream = new FileOutputStream("D:\\Print_in_WORD\\" + i + "_" + fio + ".doc");
+                String path = new File("").getAbsolutePath();
+                FileOutputStream outputStream = new FileOutputStream(i + "_" + fio + ".doc");
                 document.write(outputStream);
                 outputStream.close();
             }

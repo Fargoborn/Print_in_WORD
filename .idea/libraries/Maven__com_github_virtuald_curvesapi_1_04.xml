@@ -2,10 +2,10 @@
   <library name="Maven: com.github.virtuald:curvesapi:1.04">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/com/github/virtuald/curvesapi/1.04/curvesapi-1.04.jar!/" />
-      <root url="jar://C:/Program Files/JetBrains/IntelliJ IDEA Community Edition 2017.3.1/lib/padeg_Library/padeg-3.3.0.24.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://C:/Program Files/JetBrains/IntelliJ IDEA Community Edition 2017.3.1/lib/padeg_Library/padeg-3.3.0.24-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/virtuald/curvesapi/1.04/curvesapi-1.04-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/com/github/virtuald/curvesapi/1.04/curvesapi-1.04-sources.jar!/" />

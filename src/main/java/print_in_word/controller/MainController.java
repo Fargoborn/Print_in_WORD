@@ -17,13 +17,18 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import print_in_word.print.Print;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 
 public class MainController {
 
     String work_file = "";
     String work_file_list = "";
     Stage Window = new Stage();
+    Print print = new Print();
 
     @FXML
     private TextField pr_Field_list;
@@ -37,13 +42,39 @@ public class MainController {
         pint_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
-                System.out.println(work_file);
-                Print print = new Print();
                 try {
+                    pr_Field_list.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+                    //TimeUnit.SECONDS.sleep(6);
+                    PrintWriter log;
+                    FileWriter logFile;
+                    /*  Сначала откроем файл, в который будем писать ошибки */
+                    try {
+                        String path = new File("").getAbsolutePath();
+                        logFile = new FileWriter(path + "exceptions.log", true);
+                        log = new PrintWriter((java.io.Writer)logFile);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        return;
+                    }
+                    try {
+        /*  Тут находится основной код вашего приложения. Ошибки будут
+            проявляться в виде исключений, например так (искуственный
+            пример)
+        */
+                        print.prints(work_file, work_file_list);
+                    } catch (Exception ex) {
+        /*  Перехватываем все необработанные исключения и пишем в логфайл
+            временную отметку, сообщение об ошибке и стектрейс (в котором
+            будут указаны методы, которые привели к ошибке и номера строк
+            в исходниках)
+        */
+                        log.printf("\n%s: %s\n", LocalDateTime.now(), ex.getMessage());
+                        ex.printStackTrace(log);
+                        log.flush();
+                    }
                     print.prints(work_file, work_file_list);
                     pr_Field_list.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-                } catch (IOException | InvalidFormatException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
