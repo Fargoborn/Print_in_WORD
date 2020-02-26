@@ -32,7 +32,9 @@ public class Persons {
                 while (it.hasNext()) {
                     Row row = it.next();
                     Cell pers_cell = row.getCell(1);
-                    list_persons.add(pers_cell.getStringCellValue());
+                    Cell num_pers_cell = row.getCell(0);
+                    Cell ststus_cell =  row.getCell(2);
+                    list_persons.add((int) num_pers_cell.getNumericCellValue() + "&&" + pers_cell.getStringCellValue() + "&&" + ststus_cell.getStringCellValue());
                     //System.out.println(pers_cell.getStringCellValue());
             }
             }

@@ -21,13 +21,18 @@ public class Print {
     public void prints (String filename, String file_excel) throws IOException, InvalidFormatException {
 
         Persons persons = new Persons();
-        ArrayList<String> names = persons.getPersons(file_excel);
+        ArrayList<String> personal = persons.getPersons(file_excel);
         String fio = "";
+        String status = "";
         //InputStream in = new FileInputStream("D:\\Print_in_WORD\\Общество с ограниченной.docx");
 
         String searchValue = "#FIO";
         int i = 0;
-        for (String name : names) {
+        for (String pers : personal) {
+            String[] prs = pers.split("&&");
+            String name = prs[1];
+            String num = prs[0];
+            status = prs[2];
             XWPFDocument document = new XWPFDocument(new FileInputStream(filename) {
                 @Override
                 public int read() throws IOException {
@@ -44,17 +49,27 @@ public class Print {
                                 for (XWPFRun r : runs) {
                                     String text = r.getText(0);
                                     if (text != null && text.contains("FIO")) {
-                                        Get_NativePadeg get_nativePadeg = new Get_NativePadeg(name);
-                                        fio = get_nativePadeg.getGet_NativePadeg();
+                                        Get_NativePadeg get_nativePadeg = new Get_NativePadeg();
+                                        fio = get_nativePadeg.getGet_NativePadeg(name);
                                         text = text.replace("FIO", fio);
                                         r.setText(text, 0);
+                                    }
+                                }
+                                for (XWPFRun r : runs) {
+                                    String text1 = r.getText(0);
+                                    if (text1 != null && text1.contains("STATUS")) {
+                                        Get_NativePadeg get_nativeP = new Get_NativePadeg();
+                                        status = get_nativeP.getGet_NativePadeg_Status(status);
+                                        text1 = text1.replace("STATUS", status);
+                                        r.setText(text1, 0);
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
+
             System.out.println("@@@@@@");
             for (XWPFParagraph p : document.getParagraphs()) {
                 List<XWPFRun> runs = p.getRuns();
@@ -62,9 +77,14 @@ public class Print {
                     for (XWPFRun r : runs) {
                         String text = r.getText(0);
                         //System.out.println(text);
+                        if (text != null && text.contains("NUM")) {
+                            String[] strings = name.split(" ");
+                            text = text.replace("NUM", num);
+                            r.setText(text, 0);
+                        }
                         if (text != null && text.contains("FIO")) {
                             String[] strings = name.split(" ");
-                            name = strings[0] + " " + strings[1];
+                            name = "Уважаемый(ая)" + " " + strings[1] + " " + strings[2];
                             text = text.replace("FIO", name);
                             r.setText(text, 0);
                         }
