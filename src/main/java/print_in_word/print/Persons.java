@@ -31,11 +31,12 @@ public class Persons {
                 it.next();
                 while (it.hasNext()) {
                     Row row = it.next();
-                    Cell pers_cell = row.getCell(1);
                     Cell num_pers_cell = row.getCell(0);
-                    Cell ststus_cell =  row.getCell(2);
-                    list_persons.add((int) num_pers_cell.getNumericCellValue() + "&&" + pers_cell.getStringCellValue() + "&&" + ststus_cell.getStringCellValue());
-                    //System.out.println(pers_cell.getStringCellValue());
+                    Cell reg_cell = row.getCell(1);
+                    Cell pers_cell = row.getCell(2);
+                    Cell ststus_cell =  row.getCell(3);
+                    list_persons.add((int) num_pers_cell.getNumericCellValue() + "&&" + reg_cell.getStringCellValue() + "&&" + pers_cell.getStringCellValue() + "&&" + ststus_cell.getStringCellValue());
+                    System.out.println(num_pers_cell + " " + pers_cell.getStringCellValue());
             }
             }
         }

@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,18 +25,31 @@ public class Print {
         //InputStream in = new FileInputStream("D:\\Print_in_WORD\\Общество с ограниченной.docx");
         String searchValue = "#FIO";
         int i = 0;
-        for (String pers : personal) {
-            String[] prs = pers.split("&&");
-            String name = prs[1];
-            String num = prs[0];
-            status = prs[2];
+        for (int j = 0; j < personal.size(); j++) {
+
+            String[] prs = personal.get(j).split("&&");
+            String num = prs[0].trim();
+            String podr = prs[1].trim();
+            String name = prs[2].trim();
+            status = prs[3].trim();
+
+            Path path = Paths.get("D:\\Print_in_WORD\\__Print_in_WORD\\" + podr);
+            if(!Files.exists(path)) {
+                try {
+                    Files.createDirectories(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
             XWPFDocument document = new XWPFDocument(new FileInputStream(filename) {
                 @Override
                 public int read() throws IOException {
                     return 0;
                 }
             });
-            //System.out.println(name);
+
+            System.out.println(name);
             for (XWPFTable tables : document.getTables()) {
                 for (XWPFTableRow rows : tables.getRows()) {
                     for (XWPFTableCell cells : rows.getTableCells()) {
@@ -66,31 +82,43 @@ public class Print {
 
             //System.out.println("@@@@@@");
             for (XWPFParagraph p : document.getParagraphs()) {
+                //System.out.println(name);
                 List<XWPFRun> runs = p.getRuns();
                 if (runs != null) {
                     for (XWPFRun r : runs) {
                         String text = r.getText(0);
                         //System.out.println(text);
-                        if (text != null && text.contains("NUM")) {
-                            String[] strings = name.split(" ");
-                            text = text.replace("NUM", num);
-                            r.setText(text, 0);
-                        }
+                        //if (text != null && text.contains("NUM")) {
+                        //    String[] strings = name.split(" ");
+                        //    text = text.replace("NUM", num);
+                        //    r.setText(text, 0);
+                        //}
                         if (text != null && text.contains("FIO")) {
                             String[] strings = name.split(" ");
-                            name = "Уважаемый(ая)" + " " + strings[1] + " " + strings[2];
-                            text = text.replace("FIO", name);
+                            String f_name = "Уважаемый(ая)" + " " + strings[1] + " " + strings[2];
+                            text = text.replace("FIO", f_name);
+                            r.setText(text, 0);
+                        }
+                    }
+                    for (XWPFRun r : runs) {
+                        String text = r.getText(0);
+                        String[] strings = name.split(" ");
+                        String s_name = strings[1].substring(0, 1) + "." + strings[2].substring(0, 1) + ". " + strings[0];
+                        //System.out.println(s_name);
+                        if (text != null && text.contains("$$$$$$")) {
+                            text = text.replace("$$$$$$", s_name);
                             r.setText(text, 0);
                         }
                     }
                 }
-                String path = new File("").getAbsolutePath();
-                FileOutputStream outputStream = new FileOutputStream(i + "_" + fio + ".doc");
-                document.write(outputStream);
-                outputStream.close();
+
             }
         i++;
-
+            System.out.println(i);
+            FileOutputStream outputStream = new FileOutputStream(path + "\\" + " " + fio + "_" + num + ".doc");
+            document.write(outputStream);
+            outputStream.close();
+            document.close();
         }
     }
 }
