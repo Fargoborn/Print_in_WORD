@@ -35,7 +35,7 @@ public class Persons {
                     Cell reg_cell = row.getCell(1);
                     Cell pers_cell = row.getCell(2);
                     Cell ststus_cell =  row.getCell(3);
-                    list_persons.add((int) num_pers_cell.getNumericCellValue() + "&&" + reg_cell.getStringCellValue() + "&&" + pers_cell.getStringCellValue() + "&&" + ststus_cell.getStringCellValue());
+                    list_persons.add((int) num_pers_cell.getNumericCellValue() + "&&" + (int) reg_cell.getNumericCellValue() + "&&" + pers_cell.getStringCellValue() + "&&" + ststus_cell.getStringCellValue());
                     System.out.println(num_pers_cell + " " + pers_cell.getStringCellValue());
             }
             }

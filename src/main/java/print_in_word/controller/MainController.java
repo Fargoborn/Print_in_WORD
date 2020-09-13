@@ -15,6 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import print_in_word.print.Print;
+import print_in_word.print.Print_spr;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -28,7 +29,8 @@ public class MainController {
     String work_file = "";
     String work_file_list = "";
     Stage Window = new Stage();
-    Print print = new Print();
+    //Print_spr print = new Print_spr(); //справки вирус
+    Print print = new Print(); //уведомления трудовые книжки
 
     @FXML
     private TextField pr_Field_list;
@@ -87,7 +89,7 @@ public class MainController {
     private TextField textField;
     public void click_file_choose() {
         final FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File("D:\\Print_in_WORD"));
+        fileChooser.setInitialDirectory(new File("E:\\Git_Rep\\Print_in_WORD"));
         file_choose.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -105,7 +107,7 @@ public class MainController {
 
     public void click_file_choose_list() {
         final FileChooser fileChooser_list = new FileChooser();
-        fileChooser_list.setInitialDirectory(new File("D:\\Print_in_WORD"));
+        fileChooser_list.setInitialDirectory(new File("E:\\Git_Rep\\Print_in_WORD"));
         file_choose_list.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

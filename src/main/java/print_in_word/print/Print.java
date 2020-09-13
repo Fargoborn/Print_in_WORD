@@ -33,7 +33,8 @@ public class Print {
             String name = prs[2].trim();
             status = prs[3].trim();
 
-            Path path = Paths.get("D:\\Print_in_WORD\\__Print_in_WORD\\" + podr);
+            //Path path = Paths.get("D:\\Print_in_WORD\\__Print_in_WORD\\" + podr);
+            Path path = Paths.get("E:\\Git_Rep\\Print_in_WORD\\Трудовые\\Уведомления");
             if(!Files.exists(path)) {
                 try {
                     Files.createDirectories(path);
@@ -105,8 +106,8 @@ public class Print {
                         String[] strings = name.split(" ");
                         String s_name = strings[1].substring(0, 1) + "." + strings[2].substring(0, 1) + ". " + strings[0];
                         //System.out.println(s_name);
-                        if (text != null && text.contains("$$$$$$")) {
-                            text = text.replace("$$$$$$", s_name);
+                        if (text != null && text.contains("SF")) {
+                            text = text.replace("SF", s_name);
                             r.setText(text, 0);
                         }
                     }
